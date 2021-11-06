@@ -1,0 +1,14 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: genix7000
+Upstream-Contact: cab404 <cab404@mailbox.org>
+Source: https://github.com/cab404/genix7000
+
+# Sample paragraph, commented out:
+#
+Files: src/*{.svg,.json,.png,.md}
+Copyright: $YEAR $NAME <$CONTACT>
+License: Unlicense
+
+Files: src/*{.scad}
+Copyright: $YEAR $NAME <$CONTACT>
+License: GPL-3.0-or-later

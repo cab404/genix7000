@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Unlicense
+
 // Universal Nix project logo generator!
 
 // number of lambdas

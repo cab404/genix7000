@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: Unlicense
+-->
+
 Genix7000
 ===
 
@@ -14,7 +18,7 @@ Why, you ask? Cause it's fun!
 
 ### Developing
 
-Just install Nix, run `nix-shell -p openscad --command "openscad ./genix.scad"`, and you are good to go!
+Just [install Nix](https://nixos.org/download.html#nix-quick-install), run `nix-shell -p openscad --command "openscad ./genix.scad"`, and you are good to go!
 
 
 *ehm, I just wanted to do a Nix logo, but a pentagram*
