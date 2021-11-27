@@ -1,0 +1,42 @@
+{
+    "parameterSets": {
+        "pentanix": {
+            "clipr": "100",
+            "cliprot": "10",
+            "colors": "[\"red\"]",
+            "foff": "[37, -16]",
+            "gaps": "[3, -5]",
+            "invclip": "true",
+            "larm": "36",
+            "lrot": "0",
+            "num": "5",
+            "thick": "18"
+        },
+        "nixubuntu": {
+            "clipr": "200",
+            "cliprot": "116",
+            "colors": "[\"orange\"]",
+            "foff": "[26, 36]",
+            "gaps": "[-2, 4]",
+            "invclip": "true",
+            "larm": "30",
+            "lrot": "45",
+            "num": "3",
+            "thick": "20"
+        },
+        "genix7000": {
+            "clipr": "91",
+            "cliprot": "33",
+            "colors": "[\"#cd3535\", \"#cd6b35\", \"#cdb835\", \"#35cd62\", \"#35cdc1\", \"#3577cd\", \"#9a35cd\"]",
+            "foff": "[-33, -39]",
+            "gaps": "[-3, -3]",
+            "invclip": "false",
+            "larm": "30",
+            "lrot": "-50",
+            "num": "7",
+            "thick": "20"
+        }
+    },
+    "parameterSets": "",
+    "fileFormatVersion": "1"
+}
