@@ -6,10 +6,10 @@
 num = 6; // [3:25]
 
 // Offset of lambda
-foff = [-24, -42];
+foff = [-22.3, -37];
 
 // Offset after clipping. Use for gaps.
-gaps = [3, -5];
+gaps = [0, -2.60];
 
 // rotation of each lambda
 lrot = 0; // [-180:180]
@@ -18,12 +18,17 @@ lrot = 0; // [-180:180]
 larm = 30; // [-180:180]
 
 // Clipping ngon radius
-clipr = 92; // [0:300]
+clipr = 90.82; // [0:300]
 // Clipping ngon rotation
 cliprot = 0;  // [-180:180]
 
 // lambda thickness
-thick = 20; // [5:30]
+thick = 17; // [5:30]
+
+circle_r = 44;
+circle_t = 6;
+pin_l = 27;
+pin_r = 3;
 
 // remove this parameter if you want to update Thingiverse project 
 // colors to use
@@ -35,6 +40,8 @@ invclip = false;
 show_full = false;
 show_module = false;
 show_circle = false;
+// Pin/hole size ratio
+hole_ratio = 1.07;
 
 // copied from <MCAD/regular_shapes.scad> so customizer will work on thingieverse
 module regular_polygon(sides, radius)
@@ -103,7 +110,7 @@ if (false) {
 //rotate([70,8,0])
 // render the logo!
 if (show_full)
-color("#ff000022")
+color(show_module ? "#ff000022" : 0)
 union() {
 
     color("#000000")
@@ -111,8 +118,8 @@ union() {
     linear_extrude(4)
     if (show_circle)
     difference() {
-        circle(46);
-        circle(40);
+        circle(circle_r);
+        circle(circle_r - circle_t);
     }
  
     // just do that N times
@@ -123,9 +130,10 @@ union() {
     // flatten before coloring
     // final rotation, putting lambda in place
     rotate(360/num*r)
+    
+    clipper()
     translate(gaps)
     // clip the edges
-    clipper()
     // cutting it up with the same lambda at the next place
     diff(360/num)
     // translation to endpoint
@@ -135,7 +143,7 @@ union() {
     lambda();
 }
 
-module make_pin(scl = 1, r = 4) {
+module make_pin(scl = 1, r = pin_r) {
     translate(foff + gaps)
     
     rotate(lrot)
@@ -143,9 +151,9 @@ module make_pin(scl = 1, r = 4) {
     
     translate([+0,30,10])
     
-    rotate([90,])
+    rotate([90,45])
     scale(scl)
-    cube([r * 2, r * 2, 50], center=true);
+    cube([r * 2, r * 2, pin_l], center=true);
     //cylinder(50, r, r, center=true);
 }
 
@@ -154,14 +162,14 @@ render()
 difference() {
     union() {
         make_pin(1);
+        linear_extrude(20)
+        clipper()
         
         translate(gaps)
-        linear_extrude(20)
         // flatten before coloring
         // final rotation, putting lambda in place
         //rotate(360/num*r)
         // clip the edges
-        clipper()
         // cutting it up with the same lambda at the next place
         
         diff(360/num)
@@ -172,6 +180,6 @@ difference() {
         lambda();
     }
     // ensuring that hole is slightly larger
-    rotate((invclip ? -1 : 1) * 360/num) make_pin(1.1);
+    rotate((invclip ? -1 : 1) * 360/num) make_pin(hole_ratio);
 }
 //rotate((invclip ? -1 : 1) * 360/num) make_pin(1.1);
