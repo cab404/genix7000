@@ -123,7 +123,7 @@ union() {
     }
  
     // just do that N times
-    for (r=[0:num])
+    for (r=[(show_module ? 1 : 0):num-1])
     // color it with next color in array
     color(colors[r % len(colors)])
     linear_extrude(20)
