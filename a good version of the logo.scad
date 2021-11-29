@@ -2,6 +2,7 @@
 
 // This is a more rigid version of 
 
+
 // === Nix logo specification
 // number of lambdas. doesn't really work if changed in this model.
 num = 6;
@@ -96,7 +97,6 @@ module lambda() {
 module diff(nextangle, debug=false) {
     difference() {
         children();
-        color("red")
         rotate(invclip ? nextangle : -nextangle) children();
     }
 }
