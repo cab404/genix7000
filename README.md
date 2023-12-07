@@ -11,9 +11,19 @@ Genix7000
 </br>This is the ultimate, parametric and reproducible solution to all your branding problems!
 
 It kinda went out of control, and I've made an openscad customizer, which supports a really wide range of Nix logos. Including original one.
+
+
+### Running
+
+Just [install Nix](https://zero-to-nix.com/concepts/nix-installer)
+
+```bash
+nix run github:cab404/genix7000
+```
+
 ### Developing
 
-Just [install Nix](https://nixos.org/download.html#nix-quick-install), run `nix-shell -p openscad --command "openscad ./genix.scad"`, and you are good to go!
+Run `nix run`, and you are good to go!
 
 Also, you can try using customizer on Thingiverse, but it's baaaad.</br>
 Thing on thingiverse: https://www.thingiverse.com/thing:5100695
