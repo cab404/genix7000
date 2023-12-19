@@ -12,31 +12,35 @@
 
       # Export nix logo
       def main [
-        outfile:string   = "y.png",
-        --clipr:string   = "100",
-        --cliprot:string = "10",
-        --colors:string  = "[\"red\"]",
-        --foff:string    = "[37, -16]",
-        --gaps:string    = "[3, -5]",
-        --invclip:string = "true",
-        --larm:string    = "36",
-        --lrot:string    = "0",
-        --num:string     = "5",
-        --thick:string   = "18",
-        --camera:string  = "eye_5,50,100,center_0,0,100",
+        --num:int        = 7,               # Number of lambdas
+        --thick:int      = 20,              # Lambda thickness
+        --imgsize:string = "860,860",       # Image size in px
+        --offset:string  = "-30,-40",       # Offset of lambda
+        --gaps:string    = "-2,-2",         # Offset after clipping. Use for gaps.
+        --rotation:int   = 0,               # Rotation of each lambda
+        --angle:int      = 30,              # Lambda arm angle
+        --camera:string  = "0,0,480,0,0,0", # Image camera
+        --clipr:int      = 90,              # Clipping ngon radius
+        --cliprot:int    = 90,              # Clipping ngon rotation
+        --clipinv:bool   = false,           # Inverse clipping order
+        outfile:string   = "mynix.png",     # Image filename
+        ...colors:string                    # colors to use, ie "\#cd3535" "\#cd6b35" "\#cdb835"
       ] {
-        let parameterSets = (mktemp)
+        let colors = if ($colors|length) > 0 { $colors|each {|it| $it|str replace "\\" ""} } else {
+          ["#cd3535", "#cd6b35", "#cdb835", "#35cd62", "#35cdc1", "#3577cd", "#9a35cd"]
+        }
+        let parameterSets = (mktemp) 
         {
           parameterSets: {
             default: {
               clipr:   $clipr,
               cliprot: $cliprot,
-              colors:  $colors,
-              foff:    $foff,
-              gaps:    $gaps,
-              invclip: $invclip,
-              larm:    $larm,
-              lrot:    $lrot,
+              colors:  $"($colors)",
+              foff:    $"($offset|split row ',')",
+              gaps:    $"($gaps|split row ',')",
+              invclip: $clipinv,
+              larm:    $angle,
+              lrot:    $rotation,
               num:     $num,
               thick:   $thick
             }
@@ -46,7 +50,8 @@
               -o $outfile
               -P default
               -p $parameterSets
-              --camera $camera
+              --imgsize $imgsize
+              --camera  $camera
               ${./genix.scad})
         rm $parameterSets
       }
