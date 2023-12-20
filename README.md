@@ -30,7 +30,7 @@ nix run github:cab404/genix7000
 
 #### CLI
 
-To export as image
+To export as image without GUI
 
 ```bash
 nix run github:cab404/genix7000#to-image -- mynix.png "\#cd3535" "\#cd6b35" "\#cdb835"
