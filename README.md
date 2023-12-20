@@ -17,9 +17,43 @@ It kinda went out of control, and I've made an openscad customizer, which suppor
 
 Just [install Nix](https://zero-to-nix.com/concepts/nix-installer)
 
+#### GUI
+
+To start user interface
+
 ```bash
-nix run github:cab404/genix7000
+nix run github:cab404/genix7000 
 ```
+
+![Image](./screenshot.jpg)
+
+
+#### CLI
+
+To export as image
+
+```bash
+nix run github:cab404/genix7000#to-image -- mynix.png "\#cd3535" "\#cd6b35" "\#cdb835"
+```
+
+Flags:
+- `--num <Int>`: Number of lambdas (default: 7)
+- `--thick <Int>`: Lambda thickness (default: 20)
+- `--imgsize <String>`: Image size in px (default: '860,860')
+- `--offset <String>`: Offset of lambda (default: '-30,-40')
+- `--gaps <String>`: Offset after clipping. Use for gaps. (default: '-2,-2')
+- `--rotation <Int>`: Rotation of each lambda (default: 0)
+- `--angle <Int>`: Lambda arm angle (default: 30)
+- `--camera <String>`: Image camera (default: '0,0,480,0,0,0')
+- `--clipr <Int>`: Clipping ngon radius (default: 90)
+- `--cliprot <Int>`: Clipping ngon rotation (default: 90)
+- `--clipinv <Boolean>`: Inverse clipping order (default: false)
+- `-h, --help`: Display the help message for this command
+
+Arguments:
+- `outfile <string>`: Image filename (optional, default: 'mynix.png')
+- `...colors <string>`: colors to use, ie "\#cd3535" "\#cd6b35" "\#cdb835"
+
 
 ### Developing
 
