@@ -13,7 +13,7 @@ Genix7000
 It kinda went out of control, and I've made an openscad customizer, which supports a really wide range of Nix logos. Including original one.
 
 
-### Running
+### Install
 
 Just [install Nix](https://zero-to-nix.com/concepts/nix-installer)
 
