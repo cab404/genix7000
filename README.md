@@ -34,6 +34,8 @@ To export as image without GUI
 
 ```bash
 nix run github:cab404/genix7000#to-image -- mynix.png "\#cd3535" "\#cd6b35" "\#cdb835"
+nix run github:cab404/genix7000#to-image -- mynix.svg
+nix run github:cab404/genix7000#to-image -- mynix.mp4 --animation '{ thick: ($thick + $i / 2), rotation: ($rotation - $i) }' --thick 1
 ```
 
 Flags:
@@ -48,10 +50,13 @@ Flags:
 - `--clipr <Int>`: Clipping ngon radius (default: 90)
 - `--cliprot <Int>`: Clipping ngon rotation (default: 90)
 - `--clipinv <Boolean>`: Inverse clipping order (default: false)
+- `--animation <String>`: video animation function (default: '{ rotation: ($rotation - $i) }')
+- `--fps <Int>`: video frame rate (default: 15)
+- `--duration <Int>`: video duration (default: 5)
 - `-h, --help`: Display the help message for this command
 
 Arguments:
-- `outfile <string>`: Image filename (optional, default: 'mynix.png')
+- `outfile <string>`: Image filename, ie mynix.svg, mynix.mp4 (optional, default: 'mynix.png')
 - `...colors <string>`: colors to use, ie "\#cd3535" "\#cd6b35" "\#cdb835"
 
 

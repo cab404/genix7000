@@ -1,6 +1,5 @@
 #!/usr/bin/env nu
 
-let dAnimation = "{ rotation: ($rotation - $i) }"
 
 # Export nix logo
 def main [
@@ -16,9 +15,9 @@ def main [
   --cliprot:int       = 90,              # Clipping ngon rotation
   --clipinv           = false,           # Inverse clipping order
   --fps:int           = 15               # video frame rate
-  --duration:int      = 5                # video duration
-  --animation:string  = dAnimation       # animation function
-  outfile:string      = "mynix.png",     # Image filename
+  --duration:int      = 4                # video duration
+  --animation:string  = "{ rotation: ($rotation - $i) }" # animation function
+  outfile:string      = "mynix.png",     # Image filename, ie mynix.svg, mynix.mp4
   ...colors:string                       # colors to use, ie "\#cd3535" "\#cd6b35" "\#cdb835"
 ] {
   let colors = if ($colors|length) > 0 { $colors|each {|it| $it|str replace "\\" ""} } else {
