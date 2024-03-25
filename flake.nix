@@ -11,11 +11,11 @@
     (builtins.replaceStrings [
       "./genix.scad"
       "openscad"
-      "#!/usr/bin/env nu"
+      "/usr/bin/env nu"
     ] [
       "${./genix.scad}"
       "${pkgs.openscad}/bin/openscad"
-      "#!${pkgs.nushell}/bin/nu"
+      "${pkgs.nushell}/bin/nu"
     ] (builtins.readFile ./to-image.nu));
   };
 }
