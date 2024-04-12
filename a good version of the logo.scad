@@ -8,13 +8,13 @@
 num = 6;
 
 // Central aperture diameter, in units. It does produce nice effects if animated.
-aperture = 2;
+aperture = 2 + -2 * $t;
 
 // lambda height in units. fun to play with
-length = 4;
+length = 4 + -4 * $t;
 
 // Clipping polygon diameter, in units
-clipr = 8;
+clipr = 8 + -8 * $t;
 
 
 // === Some calculated core stuff
@@ -165,7 +165,7 @@ module render_module() {
     }
 }
 
-// Acrual rendering
+// Actual rendering
 
 if (printed_version == "none") {
     difference() {

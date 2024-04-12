@@ -33,7 +33,7 @@ cat <<EOF
 EOF
 
 } > ${PROFILE}.svg
-inkscape --batch-process --actions='select-all;FitCanvasToSelection;FileSave' ${PROFILE}.svg
+inkscape ${PROFILE}.svg --actions='select-all;page-fit-to-selection'  -o ${PROFILE}.svg
 }
 
 for profile in nix nix-grid nix-gapless; do
