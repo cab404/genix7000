@@ -8,8 +8,8 @@ def pad-zeroes [
 
 def main [
   --frames: int = 120
-  --width: int = 60
-  --height: int = 60
+  --width: int = 120
+  --height: int = 120
   filename: string = "./a good version of the logo.scad"
 ] {
   # parameters are dumb

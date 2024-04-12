@@ -167,7 +167,6 @@ module render_module() {
 
 // Actual rendering
 
-scale(0.5)
 if (printed_version == "none") {
     difference() {
         render_logo();
