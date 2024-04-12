@@ -29,17 +29,27 @@ def main [
   print "Colors to export: " $colors
   mkdir frames
 
-  $colors | par-each { |color| 
+  print "Exporting frames..."
+
+  $colors | par-each { |color|
+    print $"Exporting ($color)..."
     (openscad $filename
       -D ('module color(c) {if (c == "' + $color + '") children();}')
       --export-format svg
       --animate $frames
-      -o $"frames/($color).svg")
+      -o $"frames/($color).svg" e>| complete)
     # )
+    print $"($color) done..."
   }
 
-  0..($frames - 1) | par-each { |frame|
+  print $"Merging and post-processing frames..."
   
+  # haha a progress bar
+  print (0..(($frames - 1) / 5) | each {"_"} | str join) "\r" -n
+
+  0..($frames - 1) | par-each { |frame|
+    if ($frame mod 5 == 0) {print -n "|"}
+    
     let framename = $frame | pad-zeroes;
 
     let paths = ($colors 
@@ -70,8 +80,10 @@ def main [
       ]
     } | to xml | save -f $'frames/($frame).svg')
 
-    inkscape $'frames/($frame).svg' -o $'frames/($frame).svg'
-
   }
+  print " ~ Done"
+  print "Postprocessing with Inkscape..." -n
+  inkscape ...(0..($frames - 1) | each { $'frames/($in).svg' }) --actions ""
+  print " ~ Done"
 
 }
