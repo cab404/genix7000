@@ -6,15 +6,16 @@ circle(r = 0.0001);
 // === Nix logo specification
 // number of lambdas. doesn't really work if changed in this model.
 num = 6;
+res = (cos(($t * 360)) + 1) / 2;
 
 // Central aperture diameter, in units. It does produce nice effects if animated.
-aperture = 2 + -2 * $t;
+aperture = 2 + -2 * res;
 
 // lambda height in units. fun to play with
-length = 4 + -4 * $t;
+length = 4 + -4 * res;
 
 // Clipping polygon diameter, in units
-clipr = 8 + -8 * $t;
+clipr = 8 + -8 * res;
 
 
 // === Some calculated core stuff
