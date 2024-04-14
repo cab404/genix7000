@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// This is a more rigid version of 
-
+// Well, openscad fucks up its svg export, so you need _something_ in the frame
+circle(r = 0.0001);
 
 // === Nix logo specification
 // number of lambdas. doesn't really work if changed in this model.

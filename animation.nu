@@ -8,8 +8,10 @@ def pad-zeroes [
 
 def main [
   --frames: int = 120
-  --width: int = 120
-  --height: int = 120
+  --render_width: int = 120
+  --render_height: int = 120
+  --export_width: int = 120
+  --export_height: int = 120 
   filename: string = "./a good version of the logo.scad"
 ] {
   # parameters are dumb
@@ -27,7 +29,11 @@ def main [
   )
 
   print "Colors to export: " $colors
-  mkdir frames
+  
+  let out = "frames"
+  mkdir $out
+
+  let tmp = mktemp  -d  
 
   print "Exporting frames..."
 
@@ -35,10 +41,9 @@ def main [
     print $"Exporting ($color)..."
     (openscad $filename
       -D ('module color(c) {if (c == "' + $color + '") children();}')
-      --export-format svg
       --animate $frames
-      -o $"frames/($color).svg" e>| complete)
-    # )
+      -o $"($tmp)/($color).svg" e>| complete)
+
     print $"($color) done..."
   }
 
@@ -53,12 +58,12 @@ def main [
     let framename = $frame | pad-zeroes;
 
     let paths = ($colors 
-      | each { |color| {path: $"frames/($color)($framename).svg", color: $color} } 
+      | each { |color| {path: $"($tmp)/($color)($framename).svg", color: $color} } 
       | each { if ($in.path | path exists) {[$in]} else {[]} } # no monads?
       | par-each {|mpath| $mpath | each { |d|
         (open $d.path
           | lines
-          | drop nth 1 
+          | drop nth 1 # DTD breaks XML imports in Nushell 
           | str join
           | from xml
           | get content.1
@@ -71,19 +76,25 @@ def main [
     ({
       tag: "svg",
       attributes: {
-        width: $"($width)mm",
-        height: $"($height)mm",
-        viewBox: $"-($width) -($height) ($width * 2) ($height * 2)"
+        width: $"($render_width)mm",
+        height: $"($render_height)mm",
+        viewBox: $"-($render_width) -($render_height) ($render_width * 2) ($render_height * 2)"
       },
       content: [
         ...$paths
       ]
-    } | to xml | save -f $'frames/($frame).svg')
+    } | to xml | save -f $'($tmp)/($frame).svg')
 
   }
   print " ~ Done"
   print "Postprocessing with Inkscape..." -n
-  inkscape ...(0..($frames - 1) | each { $'frames/($in).svg' }) --actions ""
+  inkscape ...(0..($frames - 1) | each { $'($tmp)/($in).svg' }) --export-type=png -w $export_width -h $export_height
+  print " ~ Done"
+  
+  print "Moving frames from temporary folder..." -n
+  for frame in 0..($frames - 1) {
+    mv $'($tmp)/($frame).png' $"($out)/($frame).png"
+  }
   print " ~ Done"
 
 }
