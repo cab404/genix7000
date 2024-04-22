@@ -42,6 +42,7 @@ def main [
     (openscad $filename
       -D ('module color(c) {if (c == "' + $color + '") children();}')
       --animate $frames
+      --render
       -o $"($tmp)/($color).svg" e>| complete)
 
     print $"($color) done..."
